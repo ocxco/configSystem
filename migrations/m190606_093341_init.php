@@ -22,7 +22,7 @@ class m190606_093341_init extends Migration
         $dbuser = new \app\models\User();
         $dbuser->username = 'dbuser';
         $dbuser->password = password_hash('dbpass', PASSWORD_BCRYPT);
-        $dbuser->mobile = '15555555555';
+        $dbuser->mobile = '18888888888';
         $dbuser->save();
 
         /*** 添加角色 ***/
@@ -35,14 +35,14 @@ class m190606_093341_init extends Migration
         /**** 添加角色End ****/
 
         /*** 添加命名空间 ***/
-        // 根目录
-        $root = new \app\models\NSpace();
-        $root->namespace = '/';
-        $root->save();
         // 数据库相关
         $db = new \app\models\NSpace();
         $db->namespace = '/database';
         $db->save();
+        // others
+        $others = new \app\models\NSpace();
+        $others->namespace = '/others';
+        $others->save();
         /*** 添加命名空间End ***/
 
         /*** 添加用户->角色映射 ***/
@@ -57,10 +57,6 @@ class m190606_093341_init extends Migration
         /*** 添加用户->角色映射End ***/
 
         /*** 添加角色->命名空间映射 ***/
-        $r2n = new \app\models\Role2namespace();
-        $r2n->role_id = $admin->id;
-        $r2n->namespace_id = $root->id;
-        $r2n->save();
         $r2n = new \app\models\Role2namespace();
         $r2n->role_id = $dba->id;
         $r2n->namespace_id = $db->id;
